@@ -1,11 +1,15 @@
-import { useState } from 'react'
-import './App.module.css'
+import { useState } from "react";
+import classes from "./App.module.css";
+import MainHeader from "./components/MainHeader";
+import SearchBar from "./components/SearchBar";
 
 function App() {
-
   return (
-      <h1>Hello World</h1>
-  )
+    <main className={classes.mainContent}>
+      <MainHeader />
+      <SearchBar />
+    </main>
+  );
 }
 
-export default App
+export default App;
