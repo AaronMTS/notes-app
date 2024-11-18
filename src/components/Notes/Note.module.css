@@ -1,0 +1,34 @@
+.noteContainer {
+  flex: 0 1 330px;
+  display: grid;
+  grid-template-rows: 90% 10%;
+  color: #0e0700;
+  background-color: #fff57f;
+  padding: 12px;
+  border-radius: 10px;
+  height: 220px;
+}
+
+.entryContainer {
+  overflow-y: auto;
+}
+
+.span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  height: 24px;
+  aspect-ratio: 1;
+  background-image: url("../../assets/delete.svg");
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.button:active {
+  transform: scale(85%);
+}
