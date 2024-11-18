@@ -4,11 +4,18 @@ import searchIcon from "../assets/search-magnifying-glass.svg";
 
 const SearchBar = () => {
   return (
-    <div>
-      <span>
+    <label className={classes.sBarContainer}>
+      <span className={classes.sIconContainer}>
         <img src={searchIcon} alt="search" />
       </span>
-    </div>
+      <input
+        type="text"
+        name="searchNotes"
+        id=""
+        placeholder="type to search..."
+        className={classes.input}
+      />
+    </label>
   );
 };
 
