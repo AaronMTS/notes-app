@@ -4,10 +4,6 @@
   align-items: center;
 }
 
-.noMargin {
-  margin: 0;
-}
-
 .span {
     display: flex;
     gap: 8px;
