@@ -1,16 +1,13 @@
-import React from "react";
-import classes from "./ToggleButton.module.css";
-
 const ToggleButton = () => {
   return (
-    <label className={classes.container}>
+    <label className="relative inline-block h-6 w-12">
       <input
         type="checkbox"
         name="toggleColorScheme"
-        className={classes.checkbox}
+        className="peer invisible size-0"
       />
-      <span className={classes.sliderContainer}>
-        <span className={classes.slider}></span>
+      <span className="peer-checked:bg-primary peer-checked:*:translate-x-6 absolute top-0 left-0 h-full w-full bg-[#bbb] rounded-full cursor-pointer transition-colors duration-300">
+        <span className="absolute top-1 left-1 size-4 rounded-[50%] bg-white transition-transform duration-300"></span>
       </span>
     </label>
   );
