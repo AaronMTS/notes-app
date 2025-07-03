@@ -1,12 +1,11 @@
 import React from "react";
-import classes from "./MainHeader.module.css";
 import ToggleButton from "./Buttons/ToggleButton";
 
 const MainHeader = () => {
   return (
-    <header className={classes.container}>
-      <h1>Notes</h1>
-      <span className={classes.span}>
+    <header className="flex justify-between items-center">
+      <h1 className="leading-[normal]">Notes</h1>
+      <span className="flex gap-2">
         <h4>Dark Mode:</h4>
         <ToggleButton />
       </span>

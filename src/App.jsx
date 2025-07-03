@@ -1,5 +1,4 @@
 import { useState } from "react";
-import classes from "./App.module.css";
 import MainHeader from "./components/MainHeader";
 import SearchBar from "./components/SearchBar";
 import NotesList from "./components/NotesList";
@@ -13,7 +12,7 @@ function App() {
   });
 
   return (
-    <main className={classes.mainContent}>
+    <main className="max-w-7xl h-full max-h-screen mx-auto my-0 px-10 py-5 flex flex-col gap-7">
       <MainHeader />
       <SearchBar />
       <NotesList />

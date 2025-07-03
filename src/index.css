@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #2196f3;
+  --color-soft-yellow: #fff57f;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: Inter, sans-serif, Avenir, Helvetica, Arial, sans-serif;
@@ -17,6 +22,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, p {
   font-size: revert;
+  font-weight: revert;
 }
 
 @media (prefers-color-scheme: light) {
