@@ -1,10 +1,10 @@
-import searchIcon from "../assets/search-magnifying-glass.svg";
+import SearchIcon from "../assets/search-magnifying-glass.svg";
 
 const SearchBar = () => {
   return (
-    <label className="flex items-center gap-[3px] w-full p-1.5 bg-neutral-200 rounded-lg">
+    <label className="flex items-center gap-2 w-full p-1.5 bg-neutral-200 rounded-lg">
       <span className="flex justify-center items-center size-4.5">
-        <img className="size-full m-auto" src={searchIcon} alt="search" />
+        <SearchIcon className="size-6 text-black" />
       </span>
       <input
         type="text"
