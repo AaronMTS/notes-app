@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #2196f3;
   --color-soft-yellow: #fff57f;
@@ -10,24 +12,6 @@
   font-family: Inter, sans-serif, Avenir, Helvetica, Arial, sans-serif;
 }
 
-:root {
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-}
-
 body {
   margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-  font-size: revert;
-  font-weight: revert;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 }
