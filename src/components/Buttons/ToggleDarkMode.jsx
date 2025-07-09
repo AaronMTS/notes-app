@@ -5,7 +5,7 @@ const ToggleDarkMode = ({ isNightMode, onUpdate }) => {
   return (
     <span className="flex gap-2">
       {isNightMode ? (
-        <MoonIcon className="size-6 text-black" />
+        <MoonIcon className="size-6 text-white" />
       ) : (
         <SunIcon className="size-6 text-black" />
       )}
