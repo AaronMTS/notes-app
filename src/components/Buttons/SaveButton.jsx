@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
-
-const SaveLinkButton = ({ destination, handleSave }) => {
+const SaveButton = ({ handleSave }) => {
   return (
-    <Link
-      to={destination}
+    <button
+      type="button"
       onClick={handleSave}
       className="bg-yellow-300 px-3.5 py-1.5 rounded-md cursor-pointer hover:bg-yellow-400 active:bg-amber-400 transition-colors"
     >
       Save
-    </Link>
+    </button>
   );
 };
 
-export default SaveLinkButton;
+export default SaveButton;
