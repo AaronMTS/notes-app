@@ -2,8 +2,13 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import WebFont from "webfontloader";
 
 import Home from "./pages/Home";
-import AddNote from "./pages/AddNote";
-import Modal from "./components/Modal";
+import AddNoteModal from "./pages/AddNoteModal";
+
+WebFont.load({
+  google: {
+    families: ["Inter"],
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -12,23 +17,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/add",
-        element: (
-          <Modal>
-            <AddNote />
-          </Modal>
-        ),
+        element: <AddNoteModal />,
       },
     ],
   },
 ]);
 
 function App() {
-  WebFont.load({
-    google: {
-      families: ["Inter"],
-    },
-  });
-
   return <RouterProvider router={router} />;
 }
 
