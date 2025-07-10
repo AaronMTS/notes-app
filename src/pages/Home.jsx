@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
 import ToggleDarkMode from "../components/Buttons/ToggleDarkMode";
 import SearchBar from "../components/SearchBar";
 import NotesList from "../components/NotesList";
-import Modal from "../components/Modal";
-import AddNote from "./AddNote";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,6 +30,7 @@ const Home = () => {
         <SearchBar />
         <NotesList />
       </div>
+      <Outlet />
     </main>
   );
 };
