@@ -1,9 +1,9 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const MainHeader = ({ children }) => {
   return (
     <header className="flex justify-between items-center">
-      <h1 className="text-2xl font-semibold leading-[normal] dark:text-gray-100">Notes</h1>
+      <Link to="/" className="text-2xl font-semibold leading-[normal] dark:text-gray-100">Notes</Link>
       {children}
     </header>
   );
