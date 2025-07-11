@@ -6,7 +6,7 @@ import AddNoteModal from "./pages/AddNoteModal";
 
 WebFont.load({
   google: {
-    families: ["Inter"],
+    families: ["Inter:300-700"],
   },
 });
 
