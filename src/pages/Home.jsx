@@ -20,7 +20,7 @@ const Home = () => {
     <main
       className={`${isDarkMode ? "dark" : ""} size-full dark:bg-neutral-800`}
     >
-      <div className="max-w-7xl h-full min-h-dvh mx-auto my-0 p-5 flex flex-col gap-5 sm:px-10">
+      <div className="relative max-w-7xl h-dvh mx-auto my-0 p-5 flex flex-col gap-5 sm:px-10">
         <MainHeader>
           <ToggleDarkMode
             isNightMode={isDarkMode}
