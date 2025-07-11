@@ -1,9 +1,9 @@
 import CloseIcon from "../../assets/close.svg";
 
-const CloseButton = ({ handleClick }) => {
+const CloseButton = ({ handleClick, ...props }) => {
   return (
     <button
-      type="button"
+      {...props}
       onClick={handleClick}
       className="size-6 cursor-pointer"
     >
