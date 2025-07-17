@@ -1,3 +1,7 @@
+export const NEXT_ID = {
+  VALUE: 1,
+};
+
 export const NOTES = [
   {
     id: 1,

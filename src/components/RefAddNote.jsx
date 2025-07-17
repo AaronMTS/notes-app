@@ -1,38 +1,35 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { NEXT_ID, NOTES } from "../db";
 import CancelButton from "./Buttons/CancelButton";
 import CloseButton from "./Buttons/CloseButton";
 import SaveButton from "./Buttons/SaveButton";
 
-const StateAddNote = () => {
+const RefAddNote = () => {
   let navigate = useNavigate();
-  const initialEnteredValue = {
-    title: "",
-    details: "",
-  };
-
-  const [enteredValues, setEnteredValues] = useState(initialEnteredValue);
+  const noteTitle = useRef();
+  const noteDetails = useRef();
 
   const backToHome = () => {
     navigate("/");
   };
 
-  const handleInputChange = (identifier, value) => {
-    setEnteredValues((prevValues) => ({
-      ...prevValues,
-      [identifier]: value,
-    }));
-  };
-
   const saveNote = (event) => {
     event.preventDefault();
-    const dateToday = new Intl.DateTimeFormat("en-us", {month: "long", day: "numeric", year: "numeric"}).format(new Date());
+    const dateToday = new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date());
 
-    NOTES.push({id: NEXT_ID.VALUE++, ...enteredValues, date: `${dateToday}` });
-    setEnteredValues(initialEnteredValue);
-    console.log(NOTES)
+    NOTES.push({
+      id: NEXT_ID.VALUE++,
+      title: noteTitle.current.value,
+      details: noteDetails.current.value,
+      date: dateToday,
+    });
 
+    console.log(NOTES);
     navigate("/");
   };
 
@@ -49,19 +46,16 @@ const StateAddNote = () => {
           id="title"
           className="outline outline-slate-400 p-2 rounded-lg font-normal"
           placeholder="Enter title"
-          onChange={() => handleInputChange("title", event.target.value)}
-          value={enteredValues.title}
+          ref={noteTitle}
           required
         />
         <textarea
-          name="details"
-          id="details"
+          name=""
+          id=""
           rows="5"
           className="outline outline-slate-400 p-2 rounded-lg resize-none font-normal"
           placeholder="Enter details"
-          onChange={() => handleInputChange("details", event.target.value)}
-          value={enteredValues.details}
-          required
+          ref={noteDetails}
         ></textarea>
         <div className="flex justify-end items-center gap-2.5">
           <CancelButton type="reset" handleClick={backToHome} />
@@ -72,4 +66,4 @@ const StateAddNote = () => {
   );
 };
 
-export default StateAddNote;
+export default RefAddNote;
