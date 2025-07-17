@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { NOTES } from "../db.js";
+import { NOTES } from "../sample-db.js";
 import Note from "./Notes/Note";
 import AddNoteButton from "./Buttons/AddNoteButton.jsx";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { NEXT_ID, NOTES } from "../db";
+import { NEXT_ID, NOTES } from "../sample-db";
 import CancelButton from "./Buttons/CancelButton";
 import CloseButton from "./Buttons/CloseButton";
 import SaveButton from "./Buttons/SaveButton";
