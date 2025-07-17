@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <main
-      className={`${isDarkMode ? "dark" : ""} size-full dark:bg-neutral-800`}
+      className={`${isDarkMode ? "dark" : ""} size-full transition-colors dark:bg-neutral-800`}
     >
       <div className="relative max-w-7xl h-dvh mx-auto my-0 p-5 flex flex-col gap-5 sm:px-10">
         <MainHeader>
