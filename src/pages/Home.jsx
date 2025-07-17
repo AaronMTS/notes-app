@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
 import ToggleDarkMode from "../components/Buttons/ToggleDarkMode";
@@ -6,11 +6,9 @@ import SearchBar from "../components/SearchBar";
 import NotesList from "../components/NotesList";
 
 const Home = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, []);
+  const [isDarkMode, setIsDarkMode] = useState(() => 
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   const changeColorScheme = () => {
     setIsDarkMode(!isDarkMode);
