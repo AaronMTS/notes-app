@@ -29,7 +29,7 @@ const NotesList = () => {
       </div>
       {NOTES.length > 0 && (
         <AddNoteButton
-          className="absolute bottom-8 right-1/2 translate-x-1/2 gap-1 p-3.5 bg-[#1b3d2f] **:fill-white rounded-full custom-shadow cursor-pointer hover:bg-emerald-900 active:bg-emerald-800 md:right-5 md:translate-x-0 md:p-3"
+          className="absolute bottom-8 right-1/2 translate-x-1/2 gap-1 p-3.5 bg-blue-600 **:fill-white rounded-full custom-shadow cursor-pointer hover:bg-blue-700 active:bg-blue-800 transition-colors md:right-5 md:translate-x-0 md:p-3 dark:bg-primary dark:hover:bg-blue-500 dark:active:bg-blue-600"
           handleClick={() => navigate("/add")}
         >
         </AddNoteButton>
