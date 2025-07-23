@@ -14,23 +14,22 @@ const RefAddNote = () => {
     navigate("/");
   };
 
-  const saveNote = (event) => {
+  const saveNote = async (event) => {
     event.preventDefault();
-    const dateToday = new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date());
-
-    NOTES.push({
-      id: NEXT_ID.VALUE++,
-      title: noteTitle.current.value,
-      details: noteDetails.current.value,
-      date: dateToday,
+    const dateToday = new Date().toISOString().split("T")[0];
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes`, {
+      method: "POST",
+      headers: {
+        "X-API-KEY": import.meta.env.VITE_API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: noteTitle.current.value,
+        details: noteDetails.current.value,
+        date: dateToday,
+      }),
     });
-
-    console.log(NOTES);
-    navigate("/");
+    console.log(response)
   };
 
   return (
