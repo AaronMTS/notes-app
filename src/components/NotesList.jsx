@@ -29,13 +29,28 @@ const NotesList = () => {
   );
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/Notes`)
-      .then((response) => response.json())
-      .then((data) => {
+    (async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes`, {
+          headers: {
+            "X-API-KEY": import.meta.env.VITE_API_KEY,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          response.text().then((text) => alert(text));
+          return;
+        }
+
+        const data = await response.json();
         setNotes(data);
-      })
-      .catch((error) => alert(error))
-      .finally(() => setIsLoading(false));
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   const showDeleteModal = (noteId, noteTitle, noteDetails, noteDate) => {
