@@ -1,7 +1,13 @@
 import EditIcon from "../../assets/edit.svg";
 import DeleteIcon from "../../assets/delete.svg";
 
-const Note = ({handleShowDeleteModal, id, title, details, date}) => {
+const Note = ({ handleShowDeleteModal, id, title, details, date }) => {
+  const convertedDateFormat = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(date));
+
   return (
     <div className="flex flex-col gap-3.5 text-stone-950 bg-soft-yellow h-56 p-3 rounded-lg">
       <div className="grow flex flex-col gap-1">
@@ -12,12 +18,17 @@ const Note = ({handleShowDeleteModal, id, title, details, date}) => {
       </div>
       <hr className="text-yellow-700" />
       <span className="flex justify-between items-center h-6">
-        <p className="text-sm font-light">{date}</p>
+        <p className="text-sm font-light">{convertedDateFormat}</p>
         <span className="flex gap-1.5 items-center md:gap-0.5">
           <button type="button" tabIndex={-1} className="cursor-pointer">
             <EditIcon className="size-6 transition-transform duration-150 active:scale-90 md:size-4.5" />
           </button>
-          <button type="button" tabIndex={-1} onClick={() => handleShowDeleteModal(id, title, details, date)} className="cursor-pointer">
+          <button
+            type="button"
+            tabIndex={-1}
+            onClick={() => handleShowDeleteModal(id, title, details, date)}
+            className="cursor-pointer"
+          >
             <DeleteIcon className="size-6 transition-transform duration-150 active:scale-90 md:size-4.5" />
           </button>
         </span>
