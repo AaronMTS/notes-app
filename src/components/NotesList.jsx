@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useIsFetchingStore } from "../stores/useIsFetchingStore.js";
 import Note from "./Notes/Note";
 import NoNoteFallback from "./NoNoteFallback.jsx";
 import NotesLoadingFallback from "./NotesLoadingFallback.jsx";
@@ -12,9 +13,10 @@ const generateLoadingFallback = () =>
     .map((_, index) => <NotesLoadingFallback key={index} />);
 
 const NotesList = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [notes, setNotes] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const isFetching = useIsFetchingStore((state) => state.isFetching);
+  const setIsFetching = useIsFetchingStore((state) => state.setIsFetching);
 
   const initialDeleteModalState = {
     isShown: false,
@@ -29,29 +31,35 @@ const NotesList = () => {
   );
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes`, {
-          headers: {
-            "X-API-KEY": import.meta.env.VITE_API_KEY,
-            "Content-Type": "application/json",
-          },
-        });
+    if (isFetching) {
+      (async () => {
+        try {
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/Notes`,
+            {
+              headers: {
+                "X-API-KEY": import.meta.env.VITE_API_KEY,
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
-        if (!response.ok) {
-          response.text().then((text) => alert(text));
-          return;
+          if (!response.ok) {
+            response.text().then((text) => alert(text));
+            return;
+          }
+
+          const data = await response.json();
+          setNotes(data);
+        } catch (error) {
+          console.error(`Error fetching data: ${error}`);
+        } finally {
+          setIsFetching(false);
         }
-
-        const data = await response.json();
-        setNotes(data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
+      })();
+      console.log("Fetching...");
+    }
+  }, [isFetching]);
 
   const showDeleteModal = (noteId, noteTitle, noteDetails, noteDate) => {
     setCurrentDeleteModalState({
@@ -76,7 +84,7 @@ const NotesList = () => {
     <>
       <div
         className={`scrollbar-thin scrollbar-gray-transparent grid grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 rounded-lg ${
-          isLoading ? "animate-pulse overflow-hidden" : "overflow-y-auto"
+          isFetching ? "animate-pulse overflow-hidden" : "overflow-y-auto"
         }`}
       >
         {notes ? (
@@ -97,7 +105,7 @@ const NotesList = () => {
               handleClick={() => navigate("/add")}
             ></AddNoteButton>
           </>
-        ) : isLoading ? (
+        ) : isFetching ? (
           generateLoadingFallback()
         ) : (
           <NoNoteFallback>
