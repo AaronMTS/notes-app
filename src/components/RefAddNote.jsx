@@ -1,14 +1,15 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { NEXT_ID, NOTES } from "../sample-db";
+import { useIsFetchingStore } from "../stores/useIsFetchingStore";
 import CancelButton from "./Buttons/CancelButton";
 import CloseButton from "./Buttons/CloseButton";
 import SaveButton from "./Buttons/SaveButton";
 
 const RefAddNote = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const noteTitle = useRef();
   const noteDetails = useRef();
+  const setIsFetching = useIsFetchingStore(state => state.setIsFetching)
 
   const backToHome = () => {
     navigate("/");
@@ -17,19 +18,32 @@ const RefAddNote = () => {
   const saveNote = async (event) => {
     event.preventDefault();
     const dateToday = new Date().toISOString().split("T")[0];
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes`, {
-      method: "POST",
-      headers: {
-        "X-API-KEY": import.meta.env.VITE_API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: noteTitle.current.value,
-        details: noteDetails.current.value,
-        date: dateToday,
-      }),
+    const reqBody = JSON.stringify({
+      title: noteTitle.current.value,
+      details: noteDetails.current.value,
+      date: dateToday,
     });
-    console.log(response)
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes`, {
+        method: "POST",
+        headers: {
+          "X-API-KEY": import.meta.env.VITE_API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: reqBody,
+      });
+
+      if (!response.ok) {
+        console.log(response.statusText);
+        return;
+      }
+
+      backToHome()
+      setIsFetching(true)
+
+    } catch (error) {
+      console.error(`Error adding note: ${error}`);
+    }
   };
 
   return (
