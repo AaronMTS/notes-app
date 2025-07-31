@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Modal from "../components/Modal";
-// import AddNote from "../components/AddNote";
-// import StateAddNote from "../components/StateAddNote";
+import Modal from "../components/Modals/Modal";
 import RefAddNote from "../components/RefAddNote";
 
 const AddNoteModal = () => {

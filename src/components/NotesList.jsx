@@ -5,7 +5,7 @@ import Note from "./Notes/Note";
 import NoNoteFallback from "./NoNoteFallback.jsx";
 import NotesLoadingFallback from "./NotesLoadingFallback.jsx";
 import AddNoteButton from "./Buttons/AddNoteButton.jsx";
-import DeleteModal from "../components/DeleteModal";
+import DeleteModal from "./Modals/DeleteModal.jsx";
 
 const generateLoadingFallback = () =>
   Array(Math.min(4, Math.max(2, Math.floor((window.innerWidth - 80) / 250))))
