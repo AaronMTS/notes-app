@@ -1,13 +1,13 @@
 import CloseIcon from "../../assets/close.svg";
 
-const CloseButton = ({ handleClick, ...props }) => {
+const CloseButton = ({ handleClick, closeIconFill, ...props }) => {
   return (
     <button
       {...props}
       onClick={handleClick}
       className="size-6 cursor-pointer"
     >
-      <CloseIcon />
+      <CloseIcon className={closeIconFill} />
     </button>
   );
 };

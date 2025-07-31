@@ -40,7 +40,7 @@ const StateAddNote = () => {
     <section className="min-w-64 w-[80vw] max-w-md space-y-3 bg-slate-100 p-3.5 rounded-lg lg:w-[40vw]">
       <header className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Add a note</h3>
-        <CloseButton type="button" handleClick={backToHome} />
+        <CloseButton type="button" closeIconFill="fill-black" handleClick={backToHome} />
       </header>
       <form onSubmit={saveNote} className="flex flex-col gap-3">
         <input
