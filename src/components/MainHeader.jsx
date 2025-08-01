@@ -6,11 +6,6 @@ const MainHeader = ({ children }) => {
   const isCreatedPopupShown = useIsCreatedPopupShown(
     (state) => state.isCreatedPopupShown
   );
-  const setIsCreatedPopupShown = useIsCreatedPopupShown(
-    (state) => state.setIsCreatedPopupShown
-  );
-
-  setTimeout(() => isCreatedPopupShown && setIsCreatedPopupShown(false), 3500);
 
   return (
     <header className="flex justify-between items-center *:transition-colors">
