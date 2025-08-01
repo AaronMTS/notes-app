@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsFetchingStore } from "../stores/useIsFetchingStore.js";
+import { convertDateFormat } from "../utils/dateStringUtil.js";
 import Note from "./Notes/Note";
 import NoNoteFallback from "./NoNoteFallback.jsx";
 import NotesLoadingFallback from "./NotesLoadingFallback.jsx";
@@ -90,6 +91,8 @@ const NotesList = () => {
         {notes ? (
           <>
             {notes.map((note) => {
+              note.date = convertDateFormat(note.date)
+              
               return (
                 <Note
                   key={note.id}
