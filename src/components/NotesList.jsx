@@ -76,9 +76,27 @@ const NotesList = () => {
     setCurrentDeleteModalState(initialDeleteModalState);
   };
 
-  const deleteNote = () => {
-    // NOTES.splice(NOTES.findIndex(note => note.id === currentDeleteModalState.targetId), 1);
-    hideDeleteModal();
+  const deleteNote = async (noteId) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes/${noteId}`, {
+        method: "DELETE",
+        headers: {
+          "X-API-KEY": import.meta.env.VITE_API_KEY,
+          "Content-Type": "application/json"
+        }
+      })
+
+      if (!response.ok) {
+        console.log(response.statusText);
+        return
+      }
+
+      hideDeleteModal()
+      setIsFetching(true)
+
+    } catch (error) {
+      console.log(`Error fetching data: ${error}`)
+    }
   };
 
   return (
@@ -126,7 +144,7 @@ const NotesList = () => {
           title={currentDeleteModalState.currentTitle}
           details={currentDeleteModalState.currentDetails}
           date={currentDeleteModalState.currentDate}
-          confirmDelete={deleteNote}
+          confirmDelete={() => deleteNote(currentDeleteModalState.targetId)}
           handleHideDeleteModal={hideDeleteModal}
         />
       )}
