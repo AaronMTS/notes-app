@@ -42,7 +42,7 @@ const RefAddNote = () => {
 
       backToHome()
 
-      setIsCreatedPopupShown(true)
+      setTimeout(() => setIsCreatedPopupShown(true), 100)
       setTimeout(() => setIsCreatedPopupShown(false), 3500);
 
       setIsFetching(true)
