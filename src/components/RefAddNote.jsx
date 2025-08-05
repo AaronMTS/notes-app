@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsFetchingStore } from "../stores/useIsFetchingStore";
-import { useIsCreatedPopupShown } from "../stores/useIsCreatedPopupShown";
+import { usePopupTriggerStore } from "../stores/usePopupTriggerStore";
 import CancelButton from "./Buttons/CancelButton";
 import CloseButton from "./Buttons/CloseButton";
 import SaveButton from "./Buttons/SaveButton";
@@ -11,7 +11,7 @@ const RefAddNote = () => {
   const noteTitle = useRef();
   const noteDetails = useRef();
   const setIsFetching = useIsFetchingStore(state => state.setIsFetching)
-  const setIsCreatedPopupShown = useIsCreatedPopupShown(state => state.setIsCreatedPopupShown)
+  const setPopupTrigger = usePopupTriggerStore(state => state.setPopupTrigger)
 
   const backToHome = () => {
     navigate("/");
@@ -42,8 +42,8 @@ const RefAddNote = () => {
 
       backToHome()
 
-      setTimeout(() => setIsCreatedPopupShown(true), 100)
-      setTimeout(() => setIsCreatedPopupShown(false), 3500);
+      setTimeout(() => setPopupTrigger("save"), 100)
+      setTimeout(() => setPopupTrigger(""), 3500);
 
       setIsFetching(true)
 
@@ -66,6 +66,7 @@ const RefAddNote = () => {
           className="outline outline-slate-400 p-2 rounded-lg font-normal"
           placeholder="Enter title"
           ref={noteTitle}
+          maxLength={50}
           required
         />
         <textarea

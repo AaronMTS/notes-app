@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import SaveNotePopup from "./Popups/SaveNotePopup";
-import { useIsCreatedPopupShown } from "../stores/useIsCreatedPopupShown";
+import NoteActionPopup from "./Popups/NoteActionPopup";
+import { usePopupTriggerStore } from "../stores/usePopupTriggerStore";
 
 const MainHeader = ({ children }) => {
-  const isCreatedPopupShown = useIsCreatedPopupShown(
-    (state) => state.isCreatedPopupShown
+  const popupTrigger = usePopupTriggerStore(
+    (state) => state.popupTrigger
   );
 
   return (
     <header className="flex justify-between items-center *:transition-colors">
-      {isCreatedPopupShown && <SaveNotePopup />}
+      {popupTrigger && <NoteActionPopup action={popupTrigger} />}
       <Link
         to="/"
         className="text-2xl font-semibold leading-[normal] dark:text-gray-100"
