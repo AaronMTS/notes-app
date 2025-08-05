@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsFetchingStore } from "../stores/useIsFetchingStore.js";
+import { usePopupTriggerStore } from "../stores/usePopupTriggerStore.js";
 import { convertDateFormat } from "../utils/dateStringUtil.js";
 import Note from "./Notes/Note";
 import NoNoteFallback from "./NoNoteFallback.jsx";
@@ -18,6 +19,9 @@ const NotesList = () => {
   const [notes, setNotes] = useState();
   const isFetching = useIsFetchingStore((state) => state.isFetching);
   const setIsFetching = useIsFetchingStore((state) => state.setIsFetching);
+  const setPopupTrigger = usePopupTriggerStore(
+    (state) => state.setPopupTrigger
+  );
 
   const initialDeleteModalState = {
     isShown: false,
@@ -78,24 +82,30 @@ const NotesList = () => {
 
   const deleteNote = async (noteId) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Notes/${noteId}`, {
-        method: "DELETE",
-        headers: {
-          "X-API-KEY": import.meta.env.VITE_API_KEY,
-          "Content-Type": "application/json"
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/Notes/${noteId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "X-API-KEY": import.meta.env.VITE_API_KEY,
+            "Content-Type": "application/json",
+          },
         }
-      })
+      );
 
       if (!response.ok) {
         console.log(response.statusText);
-        return
+        return;
       }
 
-      hideDeleteModal()
-      setIsFetching(true)
+      hideDeleteModal();
 
+      setTimeout(() => setPopupTrigger("delete"), 100);
+      setTimeout(() => setPopupTrigger(""), 3500);
+
+      setIsFetching(true);
     } catch (error) {
-      console.log(`Error fetching data: ${error}`)
+      console.log(`Error fetching data: ${error}`);
     }
   };
 
@@ -109,8 +119,8 @@ const NotesList = () => {
         {notes ? (
           <>
             {notes.map((note) => {
-              note.date = convertDateFormat(note.date)
-              
+              note.date = convertDateFormat(note.date);
+
               return (
                 <Note
                   key={note.id}
