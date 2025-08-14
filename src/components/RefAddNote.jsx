@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsFetchingStore } from "../stores/useIsFetchingStore";
 import { usePopupTriggerStore } from "../stores/usePopupTriggerStore";
+import { dateToday } from "../utils/dateStringUtil";
 import CancelButton from "./Buttons/CancelButton";
 import CloseButton from "./Buttons/CloseButton";
 import SaveButton from "./Buttons/SaveButton";
@@ -19,7 +20,7 @@ const RefAddNote = () => {
 
   const saveNote = async (event) => {
     event.preventDefault();
-    const dateToday = new Date().toISOString().split("T")[0];
+    
     const reqBody = JSON.stringify({
       title: noteTitle.current.value,
       details: noteDetails.current.value,

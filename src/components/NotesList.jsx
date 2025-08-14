@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIsFetchingStore } from "../stores/useIsFetchingStore.js";
 import { usePopupTriggerStore } from "../stores/usePopupTriggerStore.js";
-import { convertDateFormat } from "../utils/dateStringUtil.js";
 import Note from "./Notes/Note";
 import NoNoteFallback from "./NoNoteFallback.jsx";
 import NotesLoadingFallback from "./NotesLoadingFallback.jsx";
@@ -62,7 +61,6 @@ const NotesList = () => {
           setIsFetching(false);
         }
       })();
-      console.log("Fetching...");
     }
   }, [isFetching]);
 
@@ -98,12 +96,12 @@ const NotesList = () => {
         return;
       }
 
+      setNotes(prevValues => prevValues.filter(note => note.id !== noteId))
+
       hideDeleteModal();
 
       setTimeout(() => setPopupTrigger("delete"), 100);
       setTimeout(() => setPopupTrigger(""), 3500);
-
-      setIsFetching(true);
     } catch (error) {
       console.log(`Error fetching data: ${error}`);
     }
@@ -119,8 +117,6 @@ const NotesList = () => {
         {notes ? (
           <>
             {notes.map((note) => {
-              note.date = convertDateFormat(note.date);
-
               return (
                 <Note
                   key={note.id}
