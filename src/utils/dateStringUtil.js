@@ -5,3 +5,9 @@ export const convertDateFormat = (dateString) => {
     year: "numeric",
   }).format(new Date(dateString));
 };
+
+export const convertToAcceptedJSValue = (dateString) => {
+  return dateString.toISOString().split('T')[0]
+}
+
+export const dateToday = new Date().toISOString().split("T")[0];
