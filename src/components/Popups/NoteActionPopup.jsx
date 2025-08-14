@@ -16,12 +16,12 @@ const currentActionStyling = {
     borderLeftColor: "border-l-lime-500",
     closeIconColor: "fill-lime-800"
   },
-  edit : {
+  edit: {
     bg: "bg-blue-200",
     icon: <InfoIcon className="size-6 fill-blue-900" />,
     textColor: "text-blue-900",
     insertedText: "updated",
-    borderLeftColor: "blue-300",
+    borderLeftColor: "border-l-blue-300",
     closeIconColor: "fill-blue-900"
   },
   delete: {
